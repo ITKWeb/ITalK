@@ -8,14 +8,14 @@
 
 class Group
 {
-private:
+public:
     QString id; // unique identifiant
 
     QString titre; // optionel, nom du group pour le retrouver sur la page de sélection
 
     QList<User> users; // ensemble des personnes du groupe
 
-public:
+
     Group(QString id, QString titre, QList<User> users);
 
     QString getId();

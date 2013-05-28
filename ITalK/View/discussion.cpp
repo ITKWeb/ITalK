@@ -9,6 +9,12 @@ Discussion::Discussion(Group &group, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QList<User> users = group.users;
+    for (int i=0; i<users.size();i++) {
+        ui->GroupList->insertPlainText(tr("%1\n").arg(users.at(i).nom));
+    }
+
+
     //QObject::connect(ui->exitGroupButton, SIGNAL(clicked()), this, SLOT(on_exitGroupButton_clicked()));
     QObject::connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(afficherMessage()));
 }

@@ -18,18 +18,13 @@ MainPage::MainPage(QWidget *parent) :
     //QLabel *pathValueLabel = new QLabel(tr("Another label"));
     //pathValueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
-    QCheckBox *readable = new QCheckBox(tr("Readable"));
+    //QCheckBox *readable = new QCheckBox(tr("Readable"));
 
     QListWidget *userListBox = new QListWidget;
-    // TEST
-     //   QList<User> users;
-       // User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
-        //users.append(moi);
-        //Group group(tr("1"), tr("Groupe Moi"), users);
-    //test
-        //UserPresentationForm user();
+         //UserPresentationForm user();
     QStringList applications;
-    UserPresentationForm form();
+    UserPresentationForm *form = new UserPresentationForm();
+
 
     for (int i = 1; i <= 10; ++i)
         applications.append(tr("User%1").arg(i));
@@ -40,12 +35,25 @@ MainPage::MainPage(QWidget *parent) :
 
     QPushButton *discussion = new QPushButton();
     discussion->setText(tr("Commencer la discussion"));
-    QObject::connect(discussion, SIGNAL(clicked()), parent, SLOT(startDiscussion()));
+    QObject::connect(discussion, SIGNAL(clicked()), this, SLOT(sendConversationSignal()));
+    QObject::connect(this, SIGNAL(startConversation(Group)), parent, SLOT(iTalKMainWindow::startDiscussion()));
+
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(image);
     mainLayout->addWidget(userListBox);
+    mainLayout->addWidget(form);
     mainLayout->addWidget(discussion);
     setLayout(mainLayout);
 
+}
+
+void MainPage::sendConversationSignal() {
+    // TEST
+        QList<User> users;
+      User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
+     users.append(moi);
+     Group group(tr("1"), tr("Groupe Moi"), users);
+    //test
+    emit startConversation(group);
 }

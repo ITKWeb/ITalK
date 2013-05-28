@@ -62,7 +62,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListView" name="GroupList">
+  <widget class="QTextBrowser" name="GroupList">
    <property name="geometry">
     <rect>
      <x>0</x>

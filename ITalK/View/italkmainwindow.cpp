@@ -17,13 +17,18 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
 {  
         italkWidgets= new QTabWidget;
         QIcon *icone = new QIcon(":/home.png");
-        italkWidgets->addTab(new MainPage(), *icone, tr("Groupes"));
+        italkWidgets->addTab(new MainPage(this), *icone, tr("Groupes"));
         italkWidgets->setTabIcon(0, *icone);
 
+
+        QPushButton *discussion = new QPushButton();
+        discussion->setText(tr("Commencer la discussion"));
+        QObject::connect(discussion, SIGNAL(clicked()), this, SLOT(startDiscussion()));
 
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->addWidget(italkWidgets);
+        mainLayout->addWidget(discussion);
         setLayout(mainLayout);
 
 

@@ -2,6 +2,7 @@
 #define MAINPAGE_H
 
 #include <QWidget>
+#include "group.h"
 
 class MainPage : public QWidget
 {
@@ -10,8 +11,10 @@ public:
     explicit MainPage(QWidget *parent = 0);
     
 signals:
+    void startConversation(Group gp);
     
 public slots:
+    void sendConversationSignal();
     
 };
 
