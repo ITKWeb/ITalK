@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = ITalK
 TEMPLATE = app
@@ -12,15 +12,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    user.cpp \
-    group.cpp \
-    message.cpp \
-    commands.cpp
+        user.cpp \
+        group.cpp \
+        message.cpp \
+        commands.cpp \
+        networkmanager.cpp \
+        networkthread.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
     group.h \
     message.h \
-    commands.h
+    commands.h \
+    networkmanager.h \
+    networkthread.h
 
 FORMS    += mainwindow.ui
