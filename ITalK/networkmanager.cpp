@@ -30,7 +30,7 @@ void NetworkManager::startDiscussion(QHostAddress sender)
 {
     NetworkThread * thread = new NetworkThread(sender, port);
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    qDebug() << "new connection on " << port << endl;
+    qDebug() << "start discussion on " << port << endl;
     thread->start();
 }
 
@@ -38,7 +38,7 @@ void NetworkManager::incomingConnection(int socketDescriptor)
 {
     NetworkThread * thread = new NetworkThread(socketDescriptor);
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    qDebug() << "new connection on 5858" << endl;
+    qDebug() << "new connection on " << port << endl;
     thread->start();
 }
 

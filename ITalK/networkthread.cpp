@@ -1,33 +1,54 @@
 #include "networkthread.h"
 
-#include <QtNetwork>
-
-#include "commands.h"
-
 NetworkThread::NetworkThread(int socketDescriptor, QObject *parent) :
-    QThread(parent), exit(false)
+    QThread(parent), exit(false), socketDescriptor(socketDescriptor), connectWithIp(false)
 {
 }
 
 NetworkThread::NetworkThread(QHostAddress sender, int port, QObject *parent) :
-    QThread(parent), exit(false), sender(sender), port(port)
+    QThread(parent), exit(false), sender(sender), port(port), connectWithIp(true)
 {
 }
 
 void NetworkThread::run()
 {
+    blockSize = 0;
     tcpSocket = new QTcpSocket();
-    tcpSocket->connectToHost(sender, port);
-
-    while(!exit) {
-        if(tcpSocket->canReadLine()) {
-            Commands cmd = Commands::deserialize(tcpSocket->readLine());
-            qDebug() << "tcp receive " << cmd.serialize() << endl;
-        }
-        send("test");
-        qDebug() << "send test" << endl;
-        sleep(1);
+    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(read()));
+    if(connectWithIp) {
+        qDebug() << "TCP connect to " << sender << "::" << port << endl;
+        tcpSocket->connectToHost(sender, port);
+    } else {
+        qDebug() << "TCP connect with " << socketDescriptor << endl;
+        tcpSocket->setSocketDescriptor(socketDescriptor);
     }
+    if(!tcpSocket->waitForConnected(1000)) {
+        qDebug() << "socket no connect" << tcpSocket->errorString() << endl;
+    } else {
+        qDebug() << "socket really connected" << endl;
+    }
+
+//    while(!exit) {
+        send(Commands::buildConnect());
+        qDebug() << "send " << Commands::buildConnect().serialize() << endl;
+//        sleep(1);
+//    }
+    exec();
+}
+
+
+void NetworkThread::read()
+{
+    qDebug() << "read !!!!!!!!!!!!!!!!!!!" << endl;
+
+    QDataStream in(tcpSocket);
+    in.setVersion(QDataStream::Qt_4_0);
+
+    QString serializedCmd;
+    in >> serializedCmd;
+
+    qDebug() << "tcp received " << serializedCmd << endl;
+
 }
 
 void NetworkThread::close()
@@ -35,17 +56,19 @@ void NetworkThread::close()
     exit = true;
 }
 
-void NetworkThread::send(QString command)
+void NetworkThread::send(Commands cmd)
 {
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_0);
     out << (quint16)0;
-    out << command;
+    out << cmd.serialize();
     out.device()->seek(0);
     out << (quint16)(block.size() - sizeof(quint16));
 
     tcpSocket->write(block);
+    tcpSocket->flush();
+    tcpSocket->waitForBytesWritten();
 //    tcpSocket.disconnectFromHost();
 //    tcpSocket.waitForDisconnected();
 }
