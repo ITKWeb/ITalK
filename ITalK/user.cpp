@@ -3,3 +3,7 @@
 User::User()
 {
 }
+
+QString User::getNom() {
+    return nom;
+}

@@ -25,7 +25,11 @@ MainPage::MainPage(QWidget *parent) :
         applications.append(tr("Application %1").arg(i));
     applicationsListBox->insertItems(0, applications);
 
+    QLabel *image = new QLabel();
+    image->setPixmap(QPixmap("home.png"));
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addWidget(image);
     mainLayout->addWidget(fileNameLabel);
     mainLayout->addWidget(fileNameEdit);
     mainLayout->addWidget(pathValueLabel);

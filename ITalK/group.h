@@ -21,6 +21,8 @@ public:
     QString getId();
 
     QString getTitre();
+
+    QList<User> getUsers();
 };
 
 #endif // GROUP_H

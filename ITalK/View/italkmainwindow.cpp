@@ -5,22 +5,20 @@
 #include <QImage>
 #include <QPixmap>
 #include "mainpage.h"
+#include "discussion.h"
+#include "group.h"
 
 
 iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
     QDialog(parent)
 {  
         italkWidgets= new QTabWidget;
-        QLabel *image = new QLabel();
-        image->setPixmap(QPixmap("icone.png"));
-        QIcon *icone = new QIcon(QPixmap("icone.png"));
+        QIcon *icone = new QIcon(QPixmap("home.png"));
         italkWidgets->addTab(new MainPage(), *icone, tr("Groupes"));
-
+        italkWidgets->setTabIcon(0, *icone);
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
-        mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
         mainLayout->addWidget(italkWidgets);
-        mainLayout->addWidget(image);
         setLayout(mainLayout);
 
         setWindowTitle(tr("iTalK"));
@@ -28,6 +26,6 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
 
 
 
-void iTalKMainWindow::addDiscussion(Group group) {
-   //italkWidgets->addTab(new Conversation(group), tr("Discussion "+group.getNom()));
+void iTalKMainWindow::addDiscussion(Group &group) {
+   italkWidgets->addTab(new Discussion(group), group.getTitre());
 }

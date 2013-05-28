@@ -24,6 +24,8 @@ public:
     User();
 
     void serialize();
+
+    QString getNom();
 };
 
 #endif // USER_H

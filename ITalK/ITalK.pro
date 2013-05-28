@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     View/discussionwidget.cpp \
     View/userpresentationform.cpp \
     View/mainpage.cpp \
-    View/italkmainwindow.cpp
+    View/italkmainwindow.cpp \
+    View/discussion.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
@@ -35,10 +36,12 @@ HEADERS  += mainwindow.h \
     View/discussionwidget.h \
     View/userpresentationform.h \
     networkmanager.h \
-    networkthread.h
+    networkthread.h \
+    View/discussion.h
 
 FORMS    += mainwindow.ui \
     View/italkmainwindow.ui \
     View/hometabwidget.ui \
     View/discussionwidget.ui \
-    View/userpresentationform.ui
+    View/userpresentationform.ui \
+    View/discussion.ui
