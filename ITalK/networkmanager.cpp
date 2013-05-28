@@ -5,9 +5,7 @@
 NetworkManager::NetworkManager(QObject *parent) :
     QTcpServer(parent)
 {
-    serverSocket = new QTcpSocket(this);
     listen(QHostAddress::Any, 5858);
-    connect(serverSocket, SIGNAL(disconnected()), serverSocket, SLOT(deleteLater()));
 }
 
 void NetworkManager::incomingConnection(int socketDescriptor)
@@ -19,7 +17,7 @@ void NetworkManager::incomingConnection(int socketDescriptor)
 
 void NetworkManager::sendMessage(QString content)
 {
-    //serverSocket = nextPendingConnection();
+    serverSocket = nextPendingConnection();
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_1);

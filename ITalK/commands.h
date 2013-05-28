@@ -17,11 +17,11 @@ private:
     QBool broadcast; // boolean si la command doit être envoyé à tous les users, sinon, liste de destinataire dans le body
 
 public:
-    Commands(QDate date, QString nom, QString body, QBool broadcast);
+    Commands(QDate date, QString nom, QString body, bool broadcast);
 
     QString serialize();
 
-    Commands deserialize(QString serialized);
+    static Commands deserialize(QString serialized);
 };
 
 #endif // COMMANDS_H
