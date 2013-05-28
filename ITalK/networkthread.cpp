@@ -39,15 +39,32 @@ void NetworkThread::run()
 
 void NetworkThread::read()
 {
-    qDebug() << "read !!!!!!!!!!!!!!!!!!!" << endl;
+    qDebug() << "tcp received nb data " << tcpSocket->bytesAvailable() << endl;
 
     QDataStream in(tcpSocket);
     in.setVersion(QDataStream::Qt_4_0);
 
+    if (blockSize == 0) {
+        if (tcpSocket->bytesAvailable() < (int)sizeof(quint16))
+        {
+            qDebug() << "not data " << tcpSocket->bytesAvailable() << endl;
+            return;
+        }
+
+        in >> blockSize;
+        qDebug() << "block size " << blockSize << endl;
+    }
+
+    if (tcpSocket->bytesAvailable() < blockSize)
+    {
+        qDebug() << "not data 2 " << tcpSocket->bytesAvailable() << endl;
+        return;
+    }
+
     QString serializedCmd;
     in >> serializedCmd;
 
-    qDebug() << "tcp received " << serializedCmd << endl;
+    qDebug() << "tcp received " << QString(serializedCmd) << endl;
 
 }
 
