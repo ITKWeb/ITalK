@@ -11,8 +11,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    user.cpp \
+    group.cpp \
+    message.cpp \
+    commands.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    user.h \
+    group.h \
+    message.h \
+    commands.h
 
 FORMS    += mainwindow.ui
