@@ -1,5 +1,6 @@
 #include "italkmainwindow.h"
-#include "ui_italkmainwindow.h"
+#include <QtGui>
+
 
 iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
     QDialog(parent)
@@ -13,13 +14,9 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
         setLayout(mainLayout);
 
         setWindowTitle(tr("iTalK"));
-    }
-}
+ }
 
-iTalKMainWindow::~iTalKMainWindow()
-{
-    delete ui;
-}
+
 
 iTalKMainWindow::addDiscussion(Group group) {
     italkWidgets->addTab(new Conversation(group), tr("Discussion "+group.getNom()));

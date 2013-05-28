@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = ITalK
 TEMPLATE = app
@@ -12,10 +12,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    user.cpp \
-    group.cpp \
-    message.cpp \
-    commands.cpp \
+        user.cpp \
+        group.cpp \
+        message.cpp \
+        commands.cpp \
+        networkmanager.cpp \
+        networkthread.cpp \
+    View/hometabwidget.cpp \
+    View/discussionwidget.cpp \
+    View/userpresentationform.cpp \
     View/mainpage.cpp \
     View/italkmainwindow.cpp
 
@@ -25,7 +30,15 @@ HEADERS  += mainwindow.h \
     message.h \
     commands.h \
     View/mainpage.h \
-    View/italkmainwindow.h
+    View/italkmainwindow.h \
+    View/hometabwidget.h \
+    View/discussionwidget.h \
+    View/userpresentationform.h
+    networkmanager.h \
+    networkthread.h
 
 FORMS    += mainwindow.ui \
-    View/italkmainwindow.ui
+    View/italkmainwindow.ui \
+    View/hometabwidget.ui \
+    View/discussionwidget.ui \
+    View/userpresentationform.ui
