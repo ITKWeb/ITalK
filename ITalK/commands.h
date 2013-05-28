@@ -15,7 +15,15 @@ private:
 public:
     Commands();
 
-    serialize();
+    void connect(); // broadcast
+
+    void sendMessage(Message m);
+
+    void createGroup(Group gp);
+
+    void exitGroup(Group gp);
+
+    void serialize();
 };
 
 #endif // COMMANDS_H

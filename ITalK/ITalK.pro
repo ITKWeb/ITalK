@@ -15,12 +15,17 @@ SOURCES += main.cpp\
     user.cpp \
     group.cpp \
     message.cpp \
-    commands.cpp
+    commands.cpp \
+    View/mainpage.cpp \
+    View/italkmainwindow.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
     group.h \
     message.h \
-    commands.h
+    commands.h \
+    View/mainpage.h \
+    View/italkmainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    View/italkmainwindow.ui

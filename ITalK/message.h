@@ -10,12 +10,22 @@ private:
 
     User userFrom;
 
-    String dateTime;
+    Date dateTime;
 
 public:
     Message();
 
+    Message(Group dest, String text, User from, Date date);
+
     void serialize();
+
+    Date getDate();
+
+    User getUserFrom();
+
+    Group getDestinataires();
+
+    String getText();
 
 };
 
