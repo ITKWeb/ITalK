@@ -4,12 +4,12 @@ Group::Group()
 {
 }
 
-String Group::getId() {
+QString Group::getId() {
     return id;
 }
 
-String Group::getTitre() {
-    if (titre == null) {
+QString Group::getTitre() {
+    if (titre == NULL) {
         return "";
     } else {
         return titre;

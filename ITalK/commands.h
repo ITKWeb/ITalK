@@ -1,21 +1,27 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
+#include <QString>
+#include <QDate>
+#include <QBool>
+
 class Commands
 {
 private:
-    Date date;
+    QDate date;
 
-    String nom; // titre de la commande
+    QString nom; // titre de la commande
 
-    String body; // commande en elle même, instruction, arguments
+    QString body; // commande en elle même, instruction, arguments
 
-    boolean broadcast; // boolean si la command doit être envoyé à tous les users, sinon, liste de destinataire dans le body
+    QBool broadcast; // boolean si la command doit être envoyé à tous les users, sinon, liste de destinataire dans le body
 
 public:
     Commands();
 
-    serialize();
+    QString serialize();
+
+    Commands deserialize(QString serialized);
 };
 
 #endif // COMMANDS_H
