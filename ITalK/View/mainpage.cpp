@@ -1,13 +1,19 @@
 #include "mainpage.h"
+#include <QLabel>
+#include <QListWidget>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QStringList>
+#include <QVBoxLayout>
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent)
 {
     QLabel *fileNameLabel = new QLabel(tr("File Name:"));
 
-    QLineEdit *fileNameEdit = new QLineEdit(fileInfo.fileName());
+    QLineEdit *fileNameEdit = new QLineEdit("My name");
 
-    QLabel *pathValueLabel = new QLabel(fileInfo.absoluteFilePath());
+    QLabel *pathValueLabel = new QLabel(tr("Another label"));
     pathValueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
     QCheckBox *readable = new QCheckBox(tr("Readable"));

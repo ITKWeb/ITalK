@@ -4,6 +4,9 @@
 #include <QString>
 #include <QDate>
 #include <QBool>
+#include "message.h"
+#include "group.h"
+
 
 class Commands
 {
@@ -26,8 +29,6 @@ public:
     void createGroup(Group gp);
 
     void exitGroup(Group gp);
-
-    void serialize();
 
     QString serialize();
 

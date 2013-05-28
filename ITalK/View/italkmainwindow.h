@@ -2,6 +2,8 @@
 #define ITALKMAINWINDOW_H
 
 #include <QDialog>
+#include <QTableWidget>
+#include "group.h"
 
 
 class iTalKMainWindow : public QDialog
@@ -11,6 +13,8 @@ class iTalKMainWindow : public QDialog
 public:
     iTalKMainWindow(QWidget *parent = 0);
     
+    void addDiscussion(Group group);
+
 private:
     QTabWidget *italkWidgets;
 };

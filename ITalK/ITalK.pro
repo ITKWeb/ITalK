@@ -33,7 +33,7 @@ HEADERS  += mainwindow.h \
     View/italkmainwindow.h \
     View/hometabwidget.h \
     View/discussionwidget.h \
-    View/userpresentationform.h
+    View/userpresentationform.h \
     networkmanager.h \
     networkthread.h
 

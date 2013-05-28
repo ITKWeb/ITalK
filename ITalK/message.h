@@ -20,17 +20,17 @@ private:
 public:
     Message();
 
-    Message(Group dest, String text, User from, Date date);
+    Message(Group dest, QString text, User from, QString date);
 
     void serialize();
 
-    Date getDate();
+    QString getDate();
 
     User getUserFrom();
 
     Group getDestinataires();
 
-    String getText();
+    QString getText();
 
 };
 
