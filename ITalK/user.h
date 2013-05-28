@@ -1,24 +1,24 @@
 #ifndef USER_H
 #define USER_H
 
+#include <QString>
+
 class User
 {
 private:
-    String nom;
+    QString nom;
 
-    String prenom;
+    QString prenom;
 
-    Group group;
+    QString pole; // ex: pôle info, Preco Team, ...
 
-    String pole; // ex: pôle info, Preco Team, ...
+    QString description; // ex: Stagiaire, DGA, ...
 
-    String description; // ex: Stagiaire, DGA, ...
+    QString image; // url vers avatar;
 
-    String image; // url vers avatar;
+    QString ip; // ip de l'utilisateur
 
-    String ip; // ip de l'utilisateur
-
-    String port; // port pour connection distante
+    QString port; // port pour connection distante
 
 public:
     User();

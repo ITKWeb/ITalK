@@ -1,16 +1,21 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include "user.h"
+#include "group.h"
+
+#include <QString>
+
 class Message
 {
 private:
-    String text;
+    QString text;
 
     Group destinataires;
 
     User userFrom;
 
-    Date dateTime;
+    QString dateTime;
 
 public:
     Message();

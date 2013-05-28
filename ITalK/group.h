@@ -1,21 +1,26 @@
 #ifndef GROUP_H
 #define GROUP_H
 
+#include "user.h"
+
+#include <QString>
+#include <QList>
+
 class Group
 {
 private:
-    String id; // unique identifiant
+    QString id; // unique identifiant
 
-    String titre; // optionel, nom du group pour le retrouver sur la page de sélection
+    QString titre; // optionel, nom du group pour le retrouver sur la page de sélection
 
-    Set<User> users; // ensemble des personnes du groupe
+    QList<User> users; // ensemble des personnes du groupe
 
 public:
     Group();
 
-    String getId();
+    QString getId();
 
-    String getTitre();
+    QString getTitre();
 };
 
 #endif // GROUP_H
