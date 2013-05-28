@@ -1,13 +1,13 @@
 #include "commands.h"
 
-Commands::Commands() : date(QDate()), nom(""), body(""), broadcast(true)
+Commands::Commands(QDate date, QString nom, QString body, bool broadcast) : date(date), nom(nom), body(body), broadcast(broadcast)
 {
 }
 
 QString Commands::serialize() {
-    return QString();
+    return QString("");
 }
 
 Commands Commands::deserialize(QString serialized) {
-    return Commands();
+    return Commands(QDate(), QString("nom"), QString("body"), false);
 }
