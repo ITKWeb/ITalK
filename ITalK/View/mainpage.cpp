@@ -5,36 +5,41 @@
 #include <QCheckBox>
 #include <QStringList>
 #include <QVBoxLayout>
+#include "userpresentationform.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent)
 {
-    QLabel *fileNameLabel = new QLabel(tr("File Name:"));
+    //QLabel *fileNameLabel = new QLabel(tr("File Name:"));
 
-    QLineEdit *fileNameEdit = new QLineEdit("My name");
+    //QLineEdit *fileNameEdit = new QLineEdit("My name");
 
-    QLabel *pathValueLabel = new QLabel(tr("Another label"));
-    pathValueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    //QLabel *pathValueLabel = new QLabel(tr("Another label"));
+    //pathValueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
     QCheckBox *readable = new QCheckBox(tr("Readable"));
 
-    QListWidget *applicationsListBox = new QListWidget;
+    QListWidget *userListBox = new QListWidget;
+    // TEST
+     //   QList<User> users;
+       // User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
+        //users.append(moi);
+        //Group group(tr("1"), tr("Groupe Moi"), users);
+    //test
+        //UserPresentationForm user();
     QStringList applications;
+    UserPresentationForm form();
 
-    for (int i = 1; i <= 30; ++i)
-        applications.append(tr("Application %1").arg(i));
-    applicationsListBox->insertItems(0, applications);
+    for (int i = 1; i <= 10; ++i)
+        applications.append(tr("User%1").arg(i));
+    userListBox->insertItems(0, applications);
 
     QLabel *image = new QLabel();
-    image->setPixmap(QPixmap("home.png"));
+    image->setPixmap(QPixmap(":/home.png"));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(image);
-    mainLayout->addWidget(fileNameLabel);
-    mainLayout->addWidget(fileNameEdit);
-    mainLayout->addWidget(pathValueLabel);
-    mainLayout->addWidget(readable);
-    mainLayout->addWidget(applicationsListBox);
+    mainLayout->addWidget(userListBox);
     setLayout(mainLayout);
 
 }

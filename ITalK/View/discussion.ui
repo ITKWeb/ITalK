@@ -6,105 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
+    <width>762</width>
     <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QScrollArea" name="scrollArea">
-   <property name="geometry">
-    <rect>
-     <x>-1</x>
-     <y>-1</y>
-     <width>221</width>
-     <height>511</height>
-    </rect>
-   </property>
-   <property name="widgetResizable">
-    <bool>true</bool>
-   </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>219</width>
-      <height>509</height>
-     </rect>
-    </property>
-    <widget class="QPushButton" name="exitGroupButton">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>470</y>
-       <width>141</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Quitter le groupe</string>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="listGroupWidget">
-     <property name="geometry">
-      <rect>
-       <x>-5</x>
-       <y>1</y>
-       <width>231</width>
-       <height>461</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QScrollArea" name="scrollArea_2">
-   <property name="geometry">
-    <rect>
-     <x>219</x>
-     <y>-1</y>
-     <width>541</width>
-     <height>421</height>
-    </rect>
-   </property>
-   <property name="widgetResizable">
-    <bool>true</bool>
-   </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>539</width>
-      <height>419</height>
-     </rect>
-    </property>
-    <widget class="QTextBrowser" name="textBrowser">
-     <property name="geometry">
-      <rect>
-       <x>-5</x>
-       <y>1</y>
-       <width>541</width>
-       <height>421</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>419</y>
-     <width>461</width>
-     <height>91</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="sendButton">
    <property name="enabled">
     <bool>true</bool>
@@ -112,8 +20,8 @@
    <property name="geometry">
     <rect>
      <x>680</x>
-     <y>470</y>
-     <width>71</width>
+     <y>480</y>
+     <width>81</width>
      <height>27</height>
     </rect>
    </property>
@@ -121,24 +29,50 @@
     <string>Envoyer</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>480</y>
+     <width>501</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exitGroupButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>480</y>
+     <width>141</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quitter le groupe</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>0</y>
+     <width>581</width>
+     <height>481</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListView" name="GroupList">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>181</width>
+     <height>481</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>textEdit</sender>
-   <signal>textChanged()</signal>
-   <receiver>sendButton</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>450</x>
-     <y>464</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>715</x>
-     <y>483</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

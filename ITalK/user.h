@@ -5,7 +5,7 @@
 
 class User
 {
-private:
+public:
     QString nom;
 
     QString prenom;
@@ -20,7 +20,6 @@ private:
 
     QString port; // port pour connection distante
 
-public:
     User(QString nom, QString prenom, QString pole, QString description, QString image, QString ip, QString port);
 
    QString serialize();

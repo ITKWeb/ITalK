@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     iTalKMainWindow iTalK;
-    iTalK.setMinimumSize(600,600);
+    iTalK.setMinimumSize(800,600);
     iTalK.show();
     new NetworkManager(5858);
 

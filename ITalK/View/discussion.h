@@ -18,6 +18,10 @@ public:
     
 private:
     Ui::Discussion *ui;
-};
+
+public slots:
+    void on_exitGroupButton_clicked();
+    void afficherMessage();
+ };
 
 #endif // DISCUSSION_H
