@@ -1,6 +1,6 @@
 #include "commands.h"
 
-Commands::Commands() : date(QDate()), nom(""), body(""), broadcast(true)
+Commands::Commands(QDate date, QString nom, QString body, QBool broadcast) : date(date), nom(nom), body(body), broadcast(broadcast)
 {
 }
 
