@@ -16,11 +16,15 @@ private:
     QList<User> users; // ensemble des personnes du groupe
 
 public:
-    Group();
+    Group(QString id, QString titre, QList<User> users);
 
     QString getId();
 
     QString getTitre();
+
+    QString serialize();
+
+    static Group deserialize(QString serialized);
 };
 
 #endif // GROUP_H

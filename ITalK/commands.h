@@ -5,6 +5,8 @@
 #include <QDate>
 #include <QBool>
 
+#include "message.h"
+
 class Commands
 {
 private:
@@ -22,6 +24,10 @@ public:
     QString serialize();
 
     static Commands deserialize(QString serialized);
+
+    static Commands buildConnect();
+
+    static Commands buildMessage(Message message);
 };
 
 #endif // COMMANDS_H

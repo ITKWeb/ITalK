@@ -21,9 +21,11 @@ private:
     QString port; // port pour connection distante
 
 public:
-    User();
+    User(QString nom, QString prenom, QString pole, QString description, QString image, QString ip, QString port);
 
-    void serialize();
+    QString serialize();
+
+    static User deserialize(QString serialized);
 };
 
 #endif // USER_H
