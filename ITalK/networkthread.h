@@ -3,12 +3,14 @@
 
 #include <QThread>
 #include <QTcpSocket>
+#include <QHostAddress>
 
 class NetworkThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit NetworkThread(int socketDescriptor, QObject *parent = 0);
+    NetworkThread(int socketDescriptor, QObject *parent = 0);
+    NetworkThread(QHostAddress sender, int port = 0, QObject *parent=0);
     void run();
     void close();
     void send(QString command);
@@ -19,9 +21,10 @@ signals:
 public slots:
 
 private:
-    int socketDescriptor;
-    QTcpSocket tcpSocket;
+    QTcpSocket * tcpSocket;
     bool exit;
+    QHostAddress sender;
+    int port;
     
 };
 
