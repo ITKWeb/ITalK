@@ -3,16 +3,17 @@
 #include <QListWidget>
 #include <QLineEdit>
 #include <QCheckBox>
+#include <QDebug>
 #include <QStringList>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include "userpresentationform.h"
 
-MainPage::MainPage(QWidget *parent) :
-    QWidget(parent)
+MainPage::MainPage(QWidget *p) :
+    QWidget(p)
 {
     //QLabel *fileNameLabel = new QLabel(tr("File Name:"));
-
+    parent = p;
     //QLineEdit *fileNameEdit = new QLineEdit("My name");
 
     //QLabel *pathValueLabel = new QLabel(tr("Another label"));
@@ -26,8 +27,10 @@ MainPage::MainPage(QWidget *parent) :
     UserPresentationForm *form = new UserPresentationForm();
 
 
-    for (int i = 1; i <= 10; ++i)
-        applications.append(tr("User%1").arg(i));
+
+    applications.append(tr("Jef Pineau"));
+    applications.append(tr("Romain Maneschi"));
+
     userListBox->insertItems(0, applications);
 
     QLabel *image = new QLabel();
@@ -36,7 +39,6 @@ MainPage::MainPage(QWidget *parent) :
     QPushButton *discussion = new QPushButton();
     discussion->setText(tr("Commencer la discussion"));
     QObject::connect(discussion, SIGNAL(clicked()), this, SLOT(sendConversationSignal()));
-    QObject::connect(this, SIGNAL(startConversation(Group)), parent, SLOT(iTalKMainWindow::startDiscussion()));
 
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -50,10 +52,15 @@ MainPage::MainPage(QWidget *parent) :
 
 void MainPage::sendConversationSignal() {
     // TEST
+    qDebug() << "start Conversation clicked";
+
         QList<User> users;
       User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
+      User lui(tr("Maneschi"), tr("Romain"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
      users.append(moi);
+     users.append(lui);
      Group group(tr("1"), tr("Groupe Moi"), users);
     //test
     emit startConversation(group);
+    //parent->startDiscussion();
 }

@@ -11,7 +11,7 @@ Discussion::Discussion(Group &group, QWidget *parent) :
 
     QList<User> users = group.users;
     for (int i=0; i<users.size();i++) {
-        ui->GroupList->insertPlainText(tr("%1\n").arg(users.at(i).nom));
+        ui->GroupList->insertPlainText(tr("%1 %2\n").arg(users.at(i).prenom, users.at(i).nom));
     }
 
 
@@ -25,9 +25,9 @@ Discussion::~Discussion()
 }
 int i=1;
 void Discussion::on_exitGroupButton_clicked() {
-    ui->textBrowser->insertPlainText(tr("Quitter le groupe %1 \n").arg(i));
-    i++;
+    ui->textBrowser->insertPlainText(tr("Quitter le groupe \n"));
     qDebug() << "exit clicked";
+    emit exit();
 }
 
 void Discussion::afficherMessage() {
@@ -35,4 +35,13 @@ void Discussion::afficherMessage() {
     ui->textBrowser->insertPlainText(tr("\n"));
     ui->textEdit->setText(tr(""));
     qDebug() << "send clicked";
+}
+
+
+void Discussion::setCorrespondingTab(int id) {
+    tabId = id;
+}
+
+int Discussion::getCorrespondingTab() {
+    return tabId;
 }

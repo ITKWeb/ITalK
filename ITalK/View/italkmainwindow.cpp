@@ -17,18 +17,15 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
 {  
         italkWidgets= new QTabWidget;
         QIcon *icone = new QIcon(":/home.png");
-        italkWidgets->addTab(new MainPage(this), *icone, tr("Groupes"));
+        MainPage *chooseGroup = new MainPage(this);
+        italkWidgets->addTab(chooseGroup, *icone, tr("Groupes"));
         italkWidgets->setTabIcon(0, *icone);
 
-
-        QPushButton *discussion = new QPushButton();
-        discussion->setText(tr("Commencer la discussion"));
-        QObject::connect(discussion, SIGNAL(clicked()), this, SLOT(startDiscussion()));
+        QObject::connect(chooseGroup, SIGNAL(startConversation(Group)), this, SLOT(startDiscussion(Group)));
 
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->addWidget(italkWidgets);
-        mainLayout->addWidget(discussion);
         setLayout(mainLayout);
 
 
@@ -36,19 +33,21 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
  }
 
 
-int j=1;
 
-void iTalKMainWindow::startDiscussion() {
+void iTalKMainWindow::startDiscussion(Group group) {
 
-    // TEST
-        QList<User> users;
-        User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
-        users.append(moi);
-        Group group(tr("1"), tr("Discussion %1").arg(j), users);
-        j++;
-    //test
-   italkWidgets->addTab(new Discussion(group), group.getTitre());
-   show();
-   qDebug() << "exit clicked";
+    qDebug() << "new discussion";
+    Discussion *newDiscussion = new Discussion(group);
+   int correspondingTab = italkWidgets->addTab(newDiscussion, group.getTitre());
+   newDiscussion->setCorrespondingTab(correspondingTab);
+   QObject::connect(newDiscussion, SIGNAL(exit()), this, SLOT(close()));
 
+}
+
+void iTalKMainWindow::close() {
+    QObject * emetteur = sender();
+
+        // On caste le sender en ce que nous supposons qu'il soit
+    Discussion * emetteurCasted = qobject_cast<Discussion*>(emetteur);
+    italkWidgets->removeTab(emetteurCasted->getCorrespondingTab());
 }
