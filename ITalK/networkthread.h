@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 
+#include "commands.h"
+
 class NetworkThread : public QThread
 {
     Q_OBJECT
@@ -13,18 +15,22 @@ public:
     NetworkThread(QHostAddress sender, int port = 0, QObject *parent=0);
     void run();
     void close();
-    void send(QString command);
+    void send(Commands cmd);
     
 signals:
     void error(QTcpSocket::SocketError socketError);
     
 public slots:
+    void read();
 
 private:
     QTcpSocket * tcpSocket;
     bool exit;
     QHostAddress sender;
     int port;
+    int socketDescriptor;
+    bool connectWithIp;
+    quint16 blockSize;
     
 };
 
