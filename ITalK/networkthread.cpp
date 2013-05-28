@@ -5,21 +5,28 @@
 #include "commands.h"
 
 NetworkThread::NetworkThread(int socketDescriptor, QObject *parent) :
-    QThread(parent), socketDescriptor(socketDescriptor), exit(false)
+    QThread(parent), exit(false)
+{
+}
+
+NetworkThread::NetworkThread(QHostAddress sender, int port, QObject *parent) :
+    QThread(parent), exit(false), sender(sender), port(port)
 {
 }
 
 void NetworkThread::run()
 {
-    if (!tcpSocket.setSocketDescriptor(socketDescriptor)) {
-        emit error(tcpSocket.error());
-        return;
-    }
+    tcpSocket = new QTcpSocket();
+    tcpSocket->connectToHost(sender, port);
+
     while(!exit) {
-        if(tcpSocket.canReadLine()) {
-            Commands::deserialize(tcpSocket.readLine());
+        if(tcpSocket->canReadLine()) {
+            Commands cmd = Commands::deserialize(tcpSocket->readLine());
+            qDebug() << "tcp receive " << cmd.serialize() << endl;
         }
-        sleep(1000);
+        send("test");
+        qDebug() << "send test" << endl;
+        sleep(1);
     }
 }
 
@@ -38,7 +45,7 @@ void NetworkThread::send(QString command)
     out.device()->seek(0);
     out << (quint16)(block.size() - sizeof(quint16));
 
-    tcpSocket.write(block);
+    tcpSocket->write(block);
 //    tcpSocket.disconnectFromHost();
 //    tcpSocket.waitForDisconnected();
 }

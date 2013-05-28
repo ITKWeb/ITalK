@@ -17,6 +17,7 @@ public:
 protected:
      void incomingConnection(int socketDescriptor);
      void brodcastMessage(QString content);
+     void startDiscussion(QHostAddress sender);
 
 signals:
     

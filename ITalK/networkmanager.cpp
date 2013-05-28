@@ -6,12 +6,10 @@ NetworkManager::NetworkManager(int port, QObject *parent) :
     QTcpServer(parent), port(port)
 {
     listen(QHostAddress::Any, port);
-    qDebug() << "server listen on 5858";
-    //sendMessage(QString("hello world !"));
+    qDebug() << "server listen on " << port << endl;
     broadcastSocket = new QUdpSocket(this);
+    connect(broadcastSocket, SIGNAL(readyRead()), this, SLOT(newClient()));
     broadcastSocket->bind(QHostAddress::Any, port);
-    connect(broadcastSocket, SIGNAL(readyRead()),
-                 this, SLOT(newClient()));
     brodcastMessage(QString("hello !"));
 }
 
@@ -20,14 +18,25 @@ void NetworkManager::newClient()
     while (broadcastSocket->hasPendingDatagrams()) {
         QByteArray datagram;
         datagram.resize(broadcastSocket->pendingDatagramSize());
-        broadcastSocket->readDatagram(datagram.data(), datagram.size());
-        qDebug() << "broadcast receive " << datagram.data() << endl;
+        QHostAddress sender;
+        quint16 senderPort;
+        broadcastSocket->readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
+        qDebug() << "broadcast receive " << QString(datagram.data()) << sender << senderPort << endl;
+        startDiscussion(sender);
     }
+}
+
+void NetworkManager::startDiscussion(QHostAddress sender)
+{
+    NetworkThread * thread = new NetworkThread(sender, port);
+    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    qDebug() << "new connection on " << port << endl;
+    thread->start();
 }
 
 void NetworkManager::incomingConnection(int socketDescriptor)
 {
-    NetworkThread * thread = new NetworkThread(socketDescriptor, this);
+    NetworkThread * thread = new NetworkThread(socketDescriptor);
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     qDebug() << "new connection on 5858" << endl;
     thread->start();

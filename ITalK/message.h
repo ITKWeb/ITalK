@@ -5,6 +5,7 @@
 #include "group.h"
 
 #include <QString>
+#include <QDate>
 
 class Message
 {
@@ -15,14 +16,14 @@ private:
 
     User userFrom;
 
-    QString dateTime;
+    QDate date;
 
 public:
-    Message();
+    Message(QString text, Group destinataires, User userFrom, QDate date);
 
-    Message(Group dest, QString text, User from, QString date);
+    QString serialize();
 
-    void serialize();
+    static Message deserialize(QString serialized);
 
     QString getDate();
 
