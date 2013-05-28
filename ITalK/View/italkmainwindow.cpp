@@ -4,9 +4,12 @@
 #include <QLabel>
 #include <QImage>
 #include <QPixmap>
+#include <QObject>
+#include <QPushButton>
 #include "mainpage.h"
 #include "discussion.h"
 #include "group.h"
+#include <QDebug>
 #include "user.h"
 
 iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
@@ -17,24 +20,30 @@ iTalKMainWindow::iTalKMainWindow(QWidget *parent) :
         italkWidgets->addTab(new MainPage(), *icone, tr("Groupes"));
         italkWidgets->setTabIcon(0, *icone);
 
-    // TEST
-        QList<User> users;
-        User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
-        users.append(moi);
-        Group group(tr("1"), tr("Groupe Moi"), users);
-    //test
 
-        italkWidgets->addTab(new Discussion(group), group.getTitre());
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->addWidget(italkWidgets);
         setLayout(mainLayout);
 
+
         setWindowTitle(tr("iTalK"));
  }
 
 
+int j=1;
 
-void iTalKMainWindow::addDiscussion(Group &group) {
+void iTalKMainWindow::startDiscussion() {
+
+    // TEST
+        QList<User> users;
+        User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
+        users.append(moi);
+        Group group(tr("1"), tr("Discussion %1").arg(j), users);
+        j++;
+    //test
    italkWidgets->addTab(new Discussion(group), group.getTitre());
+   show();
+   qDebug() << "exit clicked";
+
 }

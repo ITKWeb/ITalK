@@ -17,6 +17,7 @@ UserPresentationForm::UserPresentationForm(QWidget *parent) :
         Group group(tr("1"), tr("Groupe Moi"), users);
     //test
         ui->fullName->setText(moi.nom);
+
 }
 
 UserPresentationForm::~UserPresentationForm()

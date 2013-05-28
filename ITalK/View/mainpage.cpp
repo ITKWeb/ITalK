@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QStringList>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include "userpresentationform.h"
 
 MainPage::MainPage(QWidget *parent) :
@@ -37,9 +38,14 @@ MainPage::MainPage(QWidget *parent) :
     QLabel *image = new QLabel();
     image->setPixmap(QPixmap(":/home.png"));
 
+    QPushButton *discussion = new QPushButton();
+    discussion->setText(tr("Commencer la discussion"));
+    QObject::connect(discussion, SIGNAL(clicked()), parent, SLOT(startDiscussion()));
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(image);
     mainLayout->addWidget(userListBox);
+    mainLayout->addWidget(discussion);
     setLayout(mainLayout);
 
 }

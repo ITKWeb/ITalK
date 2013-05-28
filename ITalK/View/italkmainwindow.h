@@ -13,7 +13,8 @@ class iTalKMainWindow : public QDialog
 public:
     iTalKMainWindow(QWidget *parent = 0);
     
-    void addDiscussion(Group &group);
+public slots:
+    void startDiscussion();
 
 private:
     QTabWidget *italkWidgets;
