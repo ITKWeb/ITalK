@@ -28,11 +28,9 @@ void NetworkThread::run()
         qDebug() << "socket really connected" << endl;
     }
 
-//    while(!exit) {
-        send(Commands::buildConnect());
-        qDebug() << "send " << Commands::buildConnect().serialize() << endl;
-//        sleep(1);
-//    }
+    send(Commands::buildConnect());
+    qDebug() << "send " << Commands::buildConnect().serialize() << endl;
+
     exec();
 }
 

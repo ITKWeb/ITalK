@@ -45,3 +45,6 @@ FORMS    += mainwindow.ui \
     View/discussionwidget.ui \
     View/userpresentationform.ui \
     View/discussion.ui
+
+OTHER_FILES += \
+    config.txt

@@ -1,6 +1,10 @@
 #include "commands.h"
 
 #include <QStringList>
+#include <QFile>
+#include <QMessageBox>
+#include <QTextStream>
+#include <QDebug>
 #include "message.h"
 
 Commands::Commands(QDate date, QString nom, QString body, bool broadcast) : date(date), nom(nom), body(body), broadcast(broadcast)
@@ -30,7 +34,18 @@ Commands Commands::deserialize(QString serialized) {
 }
 
 Commands Commands::buildConnect() {
-    return Commands(QDate(), QString("connect"), QString("ip?port?"), true);
+    QFile file("../ITalK/config.txt");
+    if(!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+
+    QTextStream in(&file);
+    QString line = in.readLine();
+    qDebug() << "LINE TEXT == " << line << endl;
+    User user = User::deserialize(line);
+
+    file.close();
+    return Commands(QDate(), QString("connect"), user.serialize(), true);
 }
 
 Commands Commands::buildMessage(Message message) {
