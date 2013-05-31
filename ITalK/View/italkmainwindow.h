@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QTableWidget>
+#include <QMap>
+#include <QStringList>
+#include "user.h"
 #include "group.h"
 
 
@@ -12,14 +15,15 @@ class iTalKMainWindow : public QDialog
     
 public:
     iTalKMainWindow(QWidget *parent = 0);
-
+    User *moi;
 
 public slots:
     void startDiscussion(Group group);
-    void close();
+    void close(QString groupId);
 
 private:
     QTabWidget *italkWidgets;
+    QStringList *tabList;
 };
 
 #endif // ITALKMAINWINDOW_H

@@ -50,16 +50,18 @@ MainPage::MainPage(QWidget *p) :
 
 }
 
+int i=1;
 void MainPage::sendConversationSignal() {
     // TEST
     qDebug() << "start Conversation clicked";
 
         QList<User> users;
-      User moi(tr("Pineau"), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
-      User lui(tr("Maneschi"), tr("Romain"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
-     users.append(moi);
-     users.append(lui);
-     Group group(tr("1"), tr("Groupe Moi"), users);
+        for (int j=0; j<i;j++) {
+            User moi(tr("Pineau %1").arg(j), tr("Jef"), tr("info"), tr("dev"), tr(""), tr(""), tr(""));
+            users.append(moi);
+        }
+     Group group(tr("%1").arg(i), tr("Groupe Moi %1").arg(i), users);
+     i++;
     //test
     emit startConversation(group);
     //parent->startDiscussion();

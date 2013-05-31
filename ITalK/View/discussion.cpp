@@ -1,11 +1,14 @@
 #include "discussion.h"
 #include "ui_discussion.h"
+#include "message.h"
 #include <QDebug>
 #include <QObject>
 
-Discussion::Discussion(Group &group, QWidget *parent) :
+Discussion::Discussion(User me, Group group, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Discussion)
+    ui(new Ui::Discussion),
+    moi(me),
+    currentDiscussion(group)
 {
     ui->setupUi(this);
 
@@ -16,32 +19,38 @@ Discussion::Discussion(Group &group, QWidget *parent) :
 
 
     //QObject::connect(ui->exitGroupButton, SIGNAL(clicked()), this, SLOT(on_exitGroupButton_clicked()));
-    QObject::connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(afficherMessage()));
+    QObject::connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(envoyerMessage()));
+    QObject::connect(ui->textEdit, SIGNAL(returnPressed()), this, SLOT(envoyerMessage()));
+
 }
 
 Discussion::~Discussion()
 {
     delete ui;
 }
-int i=1;
+
 void Discussion::on_exitGroupButton_clicked() {
     ui->textBrowser->insertPlainText(tr("Quitter le groupe \n"));
     qDebug() << "exit clicked";
-    emit exit();
+    emit exit(currentDiscussion.id);
 }
 
-void Discussion::afficherMessage() {
-    ui->textBrowser->insertPlainText(ui->textEdit->text());
-    ui->textBrowser->insertPlainText(tr("\n"));
+void Discussion::envoyerMessage() {
+    QString text = ui->textEdit->text()+"\n";
+    QDate now;
+    Message aEnvoyer(text, currentDiscussion, moi, now);
+    // Command envoyer
+    afficherMessage(aEnvoyer);
     ui->textEdit->setText(tr(""));
     qDebug() << "send clicked";
 }
 
-
-void Discussion::setCorrespondingTab(int id) {
-    tabId = id;
+void Discussion::afficherMessage(Message message) {
+    ui->textBrowser->insertPlainText(message.date.toString());
+    // m_quitter->setFont(QFont("Comic Sans MS", 14));
+    ui->textBrowser->insertPlainText(tr(" "));
+    ui->textBrowser->insertPlainText(message.userFrom.nom);
+    ui->textBrowser->insertPlainText(tr(": "));
+    ui->textBrowser->insertPlainText(message.text);
 }
 
-int Discussion::getCorrespondingTab() {
-    return tabId;
-}

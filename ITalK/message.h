@@ -9,7 +9,7 @@
 
 class Message
 {
-private:
+public:
     QString text;
 
     Group destinataires;
@@ -18,20 +18,11 @@ private:
 
     QDate date;
 
-public:
     Message(QString text, Group destinataires, User userFrom, QDate date);
 
     QString serialize();
 
     static Message deserialize(QString serialized);
-
-    QString getDate();
-
-    User getUserFrom();
-
-    Group getDestinataires();
-
-    QString getText();
 
 };
 
